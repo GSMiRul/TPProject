@@ -19,4 +19,9 @@
         <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Suppliers\" />
+      <Folder Include="Products\Commands\CreateProduct\" />
+    </ItemGroup>
+
 </Project>

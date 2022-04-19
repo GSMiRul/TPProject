@@ -4,35 +4,33 @@ using TPProject.Domain.Entities;
 using TPProject.Domain.Events;
 using MediatR;
 
-namespace TPProject.Application.TodoItems.Commands.DeleteTodoItem;
+namespace TPProject.Application.Brands.Commands.DeleteBrand;
 
 public class DeleteBrandCommand : IRequest
 {
     public int Id { get; set; }
 }
 
-public class DeleteTodoItemCommandHandler : IRequestHandler<DeleteBrandCommand>
+public class DeleteBrandCommandHandler : IRequestHandler<DeleteBrandCommand>
 {
     private readonly IApplicationDbContext _context;
 
-    public DeleteTodoItemCommandHandler(IApplicationDbContext context)
+    public DeleteBrandCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
     public async Task<Unit> Handle(DeleteBrandCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.TodoItems
+        var entity = await _context.Brands
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         if (entity == null)
         {
-            throw new NotFoundException(nameof(TodoItem), request.Id);
+            throw new NotFoundException(nameof(Brand), request.Id);
         }
 
-        _context.TodoItems.Remove(entity);
-
-        entity.DomainEvents.Add(new TodoItemDeletedEvent(entity));
+        _context.Brands.Remove(entity);
 
         await _context.SaveChangesAsync(cancellationToken);
 

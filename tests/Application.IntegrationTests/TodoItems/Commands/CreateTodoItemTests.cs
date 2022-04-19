@@ -14,7 +14,7 @@ public class CreateTodoItemTests : TestBase
     [Test]
     public async Task ShouldRequireMinimumFields()
     {
-        var command = new CreateTodoItemCommand();
+        var command = new CreateBrandCommand();
 
         await FluentActions.Invoking(() =>
             SendAsync(command)).Should().ThrowAsync<ValidationException>();
@@ -30,7 +30,7 @@ public class CreateTodoItemTests : TestBase
             Title = "New List"
         });
 
-        var command = new CreateTodoItemCommand
+        var command = new CreateBrandCommand
         {
             ListId = listId,
             Title = "Tasks"
