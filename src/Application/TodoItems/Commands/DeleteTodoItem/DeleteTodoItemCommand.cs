@@ -6,12 +6,12 @@ using MediatR;
 
 namespace TPProject.Application.TodoItems.Commands.DeleteTodoItem;
 
-public class DeleteBrandCommand : IRequest
+public class DeleteTodoItemCommand : IRequest
 {
     public int Id { get; set; }
 }
 
-public class DeleteTodoItemCommandHandler : IRequestHandler<DeleteBrandCommand>
+public class DeleteTodoItemCommandHandler : IRequestHandler<DeleteTodoItemCommand>
 {
     private readonly IApplicationDbContext _context;
 
@@ -20,7 +20,7 @@ public class DeleteTodoItemCommandHandler : IRequestHandler<DeleteBrandCommand>
         _context = context;
     }
 
-    public async Task<Unit> Handle(DeleteBrandCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(DeleteTodoItemCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.TodoItems
             .FindAsync(new object[] { request.Id }, cancellationToken);

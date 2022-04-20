@@ -15,7 +15,7 @@ public class DeleteTodoItemTests : TestBase
     [Test]
     public async Task ShouldRequireValidTodoItemId()
     {
-        var command = new DeleteBrandCommand { Id = 99 };
+        var command = new DeleteTodoItemCommand { Id = 99 };
 
         await FluentActions.Invoking(() =>
             SendAsync(command)).Should().ThrowAsync<NotFoundException>();
@@ -29,13 +29,13 @@ public class DeleteTodoItemTests : TestBase
             Title = "New List"
         });
 
-        var itemId = await SendAsync(new CreateBrandCommand
+        var itemId = await SendAsync(new CreateTodoItemCommand
         {
             ListId = listId,
             Title = "New Item"
         });
 
-        await SendAsync(new DeleteBrandCommand
+        await SendAsync(new DeleteTodoItemCommand
         {
             Id = itemId
         });

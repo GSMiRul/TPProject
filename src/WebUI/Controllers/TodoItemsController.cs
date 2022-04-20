@@ -19,13 +19,13 @@ public class TodoItemsController : ApiControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<int>> Create(CreateBrandCommand command)
+    public async Task<ActionResult<int>> Create(CreateTodoItemCommand command)
     {
         return await Mediator.Send(command);
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> Update(int id, UpdateBrandCommand command)
+    public async Task<ActionResult> Update(int id, UpdateTodoItemCommand command)
     {
         if (id != command.Id)
         {
@@ -53,7 +53,7 @@ public class TodoItemsController : ApiControllerBase
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {
-        await Mediator.Send(new DeleteBrandCommand { Id = id });
+        await Mediator.Send(new DeleteTodoItemCommand { Id = id });
 
         return NoContent();
     }

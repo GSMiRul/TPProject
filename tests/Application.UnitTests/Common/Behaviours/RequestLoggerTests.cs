@@ -1,9 +1,9 @@
 ﻿using TPProject.Application.Common.Behaviours;
 using TPProject.Application.Common.Interfaces;
-using TPProject.Application.TodoItems.Commands.CreateTodoItem;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
+using TPProject.Application.Brands.Commands.CreateBrand;
 
 namespace TPProject.Application.UnitTests.Common.Behaviours;
 
@@ -28,7 +28,7 @@ public class RequestLoggerTests
 
         var requestLogger = new LoggingBehaviour<CreateBrandCommand>(_logger.Object, _currentUserService.Object, _identityService.Object);
 
-        await requestLogger.Process(new CreateBrandCommand { ListId = 1, Title = "title" }, new CancellationToken());
+        await requestLogger.Process(new CreateBrandCommand { Id = 1, BrandName = "Sony" }, new CancellationToken());
 
         _identityService.Verify(i => i.GetUserNameAsync(It.IsAny<string>()), Times.Once);
     }
@@ -38,7 +38,7 @@ public class RequestLoggerTests
     {
         var requestLogger = new LoggingBehaviour<CreateBrandCommand>(_logger.Object, _currentUserService.Object, _identityService.Object);
 
-        await requestLogger.Process(new CreateBrandCommand { ListId = 1, Title = "title" }, new CancellationToken());
+        await requestLogger.Process(new CreateBrandCommand { Id = 1, BrandName = "Sony" }, new CancellationToken());
 
         _identityService.Verify(i => i.GetUserNameAsync(It.IsAny<string>()), Times.Never);
     }
